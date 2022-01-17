@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form th:action="@{/api/infoIp}" th:object="${usuario}" method="post">
+    <fieldset>
+        <legend>Datos del usuario</legend>
+        <table>
+            <tr>
+                <td><label th:text="ip">ip </label></td>
+                <td><input type="text" th:name="ipAddress"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Consultar</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+<div th:if="${infoIp != null}">
+    <p th:text="${infoIp.isoCode}"></p>
+</div>
+</body>
+</html>
