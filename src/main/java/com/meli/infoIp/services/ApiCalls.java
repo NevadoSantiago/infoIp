@@ -1,6 +1,8 @@
 package com.meli.infoIp.services;
 
 import com.google.gson.Gson;
+import com.meli.infoIp.model.apiCall.CurrenciesResponse;
+import com.meli.infoIp.model.apiCall.InfoCountryResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,13 +26,35 @@ public class ApiCalls {
     @Value("${infoIpDomain}")
     private String infoIpDomain;
 
+    @Value("${infoCurrencieDomain}")
+    private String infoCurrencieDomain;
+
+    @Value("${apiCurrencieKey}")
+    private String apiKey;
+
     public JSONObject getInfoIp(String ipAddress){
         log.info("Getting info of: {}", ipAddress);
         return getApiInfo(infoIpDomain, Optional.of(ipAddress), Boolean.FALSE);
     }
-    public JSONObject getInfoCountryByName(String countryName){
+    public InfoCountryResponse getInfoCountryByName(String countryName) throws Exception {
         log.info("Getting info of: {}", countryName);
-        return getApiInfo(infoCountryDomain,Optional.of(countryName), Boolean.TRUE);
+        JSONObject json = getApiInfo(infoCountryDomain,Optional.of(countryName), Boolean.TRUE);
+        Optional<InfoCountryResponse> optionalResponse =
+            InfoCountryResponse.mapFromJsonObject(json);
+        if(optionalResponse.isEmpty()) throw new Exception("Error during get info country response");
+        return optionalResponse.get() ;
+    }
+    public CurrenciesResponse getActualCurrencieInformation() throws Exception {
+        log.info("Getting info of actual currencies");
+        JSONObject json = getApiInfo(infoCurrencieDomain,Optional.empty(), Boolean.FALSE);
+        Optional<CurrenciesResponse> optionalResponse =
+            CurrenciesResponse.mapFromJsonObject(json);
+        if(optionalResponse.isEmpty()) throw new Exception("Error during get info of currencies");
+        return optionalResponse.get();
+    }
+
+    public Double getActualPriceOfCurrencie(String currencie){
+        return null;
     }
 
     public JSONObject getApiInfo(
@@ -50,7 +74,6 @@ public class ApiCalls {
             con.connect();
             BufferedReader reader =
                 new BufferedReader(new InputStreamReader(con.getInputStream()));
-            //BTCInfoRequest info = gson.fromJson(reader.readLine(), BTCInfoRequest.class);
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
             }

@@ -16,7 +16,28 @@ public class JSONObjectUtils {
         while(iterator.hasNext() && count<=position ){
             String key = (String)iterator.next();
             if(count == position) return Optional.of(getValueOfJsonByKey(json,key));
+            count++;
         }
         return Optional.empty();
+    }
+    public static void showKeysOfJsonObject(JSONObject json){
+        Integer count = 0;
+        Iterator keys = json.keys();
+        while(keys.hasNext()){
+            System.out.println(count + "--" + (String)keys.next());
+            count++;
+        }
+    }
+    public static void showAllValues(JSONObject json, Integer cantidad) throws JSONException {
+        Integer count = 0;
+        Iterator keys = json.keys();
+        while(keys.hasNext() && count <=cantidad){
+            try{
+                System.out.println(count + "--" + getValueOfJsonByPosition(json,count).get());
+            }catch(Exception e){
+                e.getMessage();
+            }
+            count++;
+        }
     }
 }

@@ -5,5 +5,5 @@ import org.json.JSONException;
 
 public interface InfoIpInterface {
 
-    InfoIpResponse getInfoByIpAddress(String ipAddress) throws JSONException;
+    InfoIpResponse getInfoByIpAddress(String ipAddress) throws Exception;
 }

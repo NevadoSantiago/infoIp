@@ -1,44 +1,34 @@
 package com.meli.infoIp.model.apiCall;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.Gson;
+import java.util.Map;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 
-/*@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor*/
+@NoArgsConstructor
+@Slf4j
 public class CurrenciesResponse {
 
-     /*   @JsonProperty("Id")
-        private String id;
-        @JsonProperty("Name")
-        private String name;
-        @JsonProperty("EffectiveEndDate")
-        private String endDate;
-        @JsonProperty("Description")
-        private String description;
-        @JsonProperty("EffectiveStartDate")
-        private String startDate;
-        @Nullable
-        @JsonProperty("tpcChangeCounter__c")
-        private Long tpcChangeCounter;
-        @JsonProperty("Category")
-        private String category;
+    private String base;
+    private Map<String, Double> rates;
 
-        public final ProductResponse copy() {
-            return ProductResponse.builder()
-                .id(id)
-                .name(name)
-                .description(description)
-                .category(category)
-                .startDate(startDate)
-                .endDate(endDate)
-                .tpcChangeCounter(tpcChangeCounter)
-                .build();
-        }*/
+    public static Optional<CurrenciesResponse> mapFromJsonObject(JSONObject json) {
+        Gson gson = new Gson();
+        try {
+            return Optional.of(gson.fromJson(
+                json.toString(),
+                CurrenciesResponse.class));
+        } catch (Exception e) {
+            log.error("An error was occurred trying map json to InfoCountryResponse");
+            return Optional.empty();
+        }
+    }
 }
