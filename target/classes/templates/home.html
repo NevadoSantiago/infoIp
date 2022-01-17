@@ -17,7 +17,15 @@
     </fieldset>
 </form>
 <div th:if="${infoIp != null}">
+    <label>Pais</label>
+    <p th:text="${infoIp.countryName}"></p>
+    <label>Codigo ISO</label>
     <p th:text="${infoIp.isoCode}"></p>
+    <label>Idioma oficial</label>
+    <p th:text="${infoIp.officialLanguage}"></p>
+    <label>Informacion de la moneda</label>
+    <p th:text="${infoIp.coinInfo.coinName}"></p>
+    <p th:text="${infoIp.coinInfo.actualPrice}"></p>
 </div>
 </body>
 </html>

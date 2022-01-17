@@ -42,11 +42,13 @@ public class ApiCalls {
         Optional<InfoCountryResponse> optionalResponse =
             InfoCountryResponse.mapFromJsonObject(json);
         if(optionalResponse.isEmpty()) throw new Exception("Error during get info country response");
-        return optionalResponse.get() ;
+        InfoCountryResponse response = optionalResponse.get();
+        response.setCountryName(countryName);
+        return response;
     }
     public CurrenciesResponse getActualCurrencieInformation() throws Exception {
         log.info("Getting info of actual currencies");
-        JSONObject json = getApiInfo(infoCurrencieDomain,Optional.empty(), Boolean.FALSE);
+        JSONObject json = getApiInfo(infoCurrencieDomain,Optional.of(apiKey), Boolean.FALSE);
         Optional<CurrenciesResponse> optionalResponse =
             CurrenciesResponse.mapFromJsonObject(json);
         if(optionalResponse.isEmpty()) throw new Exception("Error during get info of currencies");

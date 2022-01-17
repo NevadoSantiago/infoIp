@@ -31,4 +31,9 @@ public class CurrenciesResponse {
             return Optional.empty();
         }
     }
+    public Double getActualPriceInUsdOf(String currency){
+        Double relationUSDToEUR =  rates.get("USD");
+        if(base.equalsIgnoreCase(currency)) return relationUSDToEUR;
+        return rates.get(currency)/relationUSDToEUR;
+    }
 }

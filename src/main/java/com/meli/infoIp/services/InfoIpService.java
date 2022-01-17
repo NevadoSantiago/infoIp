@@ -2,6 +2,7 @@ package com.meli.infoIp.services;
 
 import com.google.gson.Gson;
 import com.meli.infoIp.model.InfoIpResponse;
+import com.meli.infoIp.model.apiCall.CurrenciesResponse;
 import com.meli.infoIp.model.apiCall.InfoCountryResponse;
 import com.meli.infoIp.services.interfaces.InfoIpInterface;
 import com.meli.infoIp.utils.JSONObjectUtils;
@@ -26,10 +27,15 @@ public class InfoIpService implements InfoIpInterface {
     public InfoIpResponse getInfoByIpAddress(String ipAddress) throws Exception {
         log.info("Starting data collection of {}",ipAddress);
         JSONObject ipInfo = apiCallsService.getInfoIp(ipAddress);
-    String countryName =
-        JSONObjectUtils.getValueOfJsonByKey(ipInfo,JSON_ATTRIBUTE_COUNTRY_NAME);
-    InfoCountryResponse infoCountryResponse = apiCallsService.getInfoCountryByName(countryName);
-        return null;
+    InfoCountryResponse infoCountryResponse = apiCallsService.getInfoCountryByName(
+            JSONObjectUtils.getValueOfJsonByKey(ipInfo,JSON_ATTRIBUTE_COUNTRY_NAME)
+        );
+    log.info(infoCountryResponse.getCurrencies().keySet().toString());
+    CurrenciesResponse infoCurrencyResponse = apiCallsService.getActualCurrencieInformation();
+    return InfoIpResponse.buildResponseByInformation(
+        infoCurrencyResponse,
+        infoCountryResponse
+    );
     }
 
     private InfoCountryResponse getInfoCountryByName(String countryName){

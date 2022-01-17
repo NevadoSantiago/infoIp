@@ -21,9 +21,10 @@ public class InfoCountryResponse {
 
     private String cioc;
     private String[] timezones;
-    private JSONObject name;
+    private String countryName;
     private String[] latlng;
-    Map<String, Object> currencies;
+    private Map<String,String> languages;
+    private Map<String, Object> currencies;
 
     public static Optional<InfoCountryResponse> mapFromJsonObject(JSONObject json){
         Gson gson=new Gson();
@@ -36,6 +37,11 @@ public class InfoCountryResponse {
             return Optional.empty();
         }
 
+    }
+    public String getCurrencyName(){
+        Optional<String> opt = this.currencies.keySet().stream().findFirst();
+        if(opt.isPresent())return opt.get();
+        else return "Invalid currency";
     }
 
         /*private String[] capital;

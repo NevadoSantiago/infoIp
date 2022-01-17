@@ -30,7 +30,7 @@ public class InfoIpController {
     @PostMapping()
     public String infoIp(
         Model model,
-        @RequestParam(value = "ipAddress") String ipAddress) throws JSONException {
+        @RequestParam(value = "ipAddress") String ipAddress) throws Exception {
         InfoIpResponse info = service.getInfoByIpAddress(ipAddress);
         model.addAttribute("infoIp",info);
         return "home";
