@@ -26,6 +26,10 @@
     <label>Informacion de la moneda</label>
     <p th:text="${infoIp.coinInfo.coinName}"></p>
     <p th:text="${infoIp.coinInfo.actualPrice}"></p>
+    <label>Date time</label>
+    <div th:each="dateTime:${infoIp.localDateTimes}">
+        <p th:text="${dateTime.toString()}"></p>
+    </div>
 </div>
 </body>
 </html>

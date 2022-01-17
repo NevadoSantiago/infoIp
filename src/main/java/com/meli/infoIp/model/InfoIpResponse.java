@@ -2,8 +2,10 @@ package com.meli.infoIp.model;
 
 import com.meli.infoIp.model.apiCall.CurrenciesResponse;
 import com.meli.infoIp.model.apiCall.InfoCountryResponse;
+import com.meli.infoIp.utils.DateUtils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lombok.Builder;
@@ -29,13 +31,14 @@ public class InfoIpResponse {
     public static InfoIpResponse buildResponseByInformation(
         CurrenciesResponse currency,
         InfoCountryResponse country
-    ) throws JSONException {
+    ) {
         return InfoIpResponse.builder()
             .countryName(country.getCountryName())
             .coinInfo(new CoinInfoResponse(
                 country.getCurrencyName(),
                 currency.getActualPriceInUsdOf(country.getCurrencyName())
             ))
+            .localDateTimes(DateUtils.getLocalDateTimeListFromUTCArray(country.getTimezones()))
             .officialLanguage(country.getLanguages())
             .isoCode(country.getCioc())
             .build();
