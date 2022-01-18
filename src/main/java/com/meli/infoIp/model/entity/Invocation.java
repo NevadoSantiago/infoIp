@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "invocations")
+@NoArgsConstructor
 public class Invocation {
 
     @Id
@@ -20,6 +22,16 @@ public class Invocation {
     private Double distance;
     @Column(name = "invocaciones")
     private Integer invocations;
+
+    public Invocation(String country, Double distance){
+        this.country = country;
+        this.distance = distance;
+        this.invocations = 1;
+    }
+
+    public void addInvocation(){
+        this.invocations = this.invocations +1;
+    }
 
 
 }

@@ -36,14 +36,11 @@ public class InfoIpService implements InfoIpInterface {
             JSONObjectUtils.getValueOfJsonByKey(ipInfo,JSON_ATTRIBUTE_COUNTRY_NAME)
         );
     CurrenciesResponse infoCurrencyResponse = apiCallsService.getActualCurrencieInformation();
-    return InfoIpResponse.buildResponseByInformation(
+    InfoIpResponse response = InfoIpResponse.buildResponseByInformation(
         infoCurrencyResponse,
         infoCountryResponse
     );
-    }
-
-    private InfoCountryResponse getInfoCountryByName(String countryName){
-
-        return null;
+    invocationService.setOrUpdateInvocation(response.getCountryName(),response.getEstimatedDistance());
+    return response;
     }
 }
