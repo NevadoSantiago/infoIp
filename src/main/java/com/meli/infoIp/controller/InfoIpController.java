@@ -18,10 +18,6 @@ public class InfoIpController {
     @Autowired
     InfoIpInterface service;
 
-   /* @GetMapping()
-    public ResponseEntity<?> getIpInfo(){
-        return new ResponseEntity<>(service.getInfoByIp(), HttpStatus.ACCEPTED);
-    }*/
     @GetMapping()
     public String home(){
         return "home";

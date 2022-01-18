@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.meli.infoIp.model.InfoIpResponse;
 import com.meli.infoIp.model.apiCall.CurrenciesResponse;
 import com.meli.infoIp.model.apiCall.InfoCountryResponse;
+import com.meli.infoIp.model.entity.Invocation;
 import com.meli.infoIp.services.interfaces.InfoIpInterface;
 import com.meli.infoIp.utils.JSONObjectUtils;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -24,13 +26,15 @@ public class InfoIpService implements InfoIpInterface {
     @Autowired
     ApiCalls apiCallsService;
 
+    @Autowired
+    InvocationService invocationService;
+
     public InfoIpResponse getInfoByIpAddress(String ipAddress) throws Exception {
         log.info("Starting data collection of {}",ipAddress);
         JSONObject ipInfo = apiCallsService.getInfoIp(ipAddress);
     InfoCountryResponse infoCountryResponse = apiCallsService.getInfoCountryByName(
             JSONObjectUtils.getValueOfJsonByKey(ipInfo,JSON_ATTRIBUTE_COUNTRY_NAME)
         );
-    log.info(infoCountryResponse.getCurrencies().keySet().toString());
     CurrenciesResponse infoCurrencyResponse = apiCallsService.getActualCurrencieInformation();
     return InfoIpResponse.buildResponseByInformation(
         infoCurrencyResponse,

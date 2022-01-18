@@ -1,1 +1,16 @@
+com\meli\infoIp\model\apiCall\InfoCountryResponse.class
+com\meli\infoIp\model\CoinInfoResponse.class
 com\meli\infoIp\InfoIpApplication.class
+com\meli\infoIp\model\InfoIpResponse$InfoIpResponseBuilder.class
+com\meli\infoIp\model\apiCall\CurrenciesResponse$CurrenciesResponseBuilder.class
+com\meli\infoIp\utils\JSONObjectUtils.class
+com\meli\infoIp\services\interfaces\InfoIpInterface.class
+com\meli\infoIp\model\InfoIpResponse.class
+com\meli\infoIp\utils\DateUtils.class
+com\meli\infoIp\model\CoinInfoResponse$CoinInfoResponseBuilder.class
+com\meli\infoIp\utils\GeoDistanceUtil.class
+com\meli\infoIp\services\InfoIpService.class
+com\meli\infoIp\services\ApiCalls.class
+com\meli\infoIp\controller\InfoIpController.class
+com\meli\infoIp\model\apiCall\CurrenciesResponse.class
+com\meli\infoIp\model\CurrenciesResponse.class
