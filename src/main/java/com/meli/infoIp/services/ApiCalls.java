@@ -1,14 +1,19 @@
 package com.meli.infoIp.services;
 
 import com.google.gson.Gson;
+import com.meli.infoIp.exceptions.ApiCallException;
 import com.meli.infoIp.model.apiCall.CurrenciesResponse;
 import com.meli.infoIp.model.apiCall.InfoCountryResponse;
+import com.meli.infoIp.utils.JSONObjectUtils;
+import com.meli.infoIp.utils.StringUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +23,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class ApiCalls {
+
+    private final String JSON_ATTRIBUTE_COUNTRY_NAME = "countryName";
+
+    public final String COUNTRY_NAME_VALUE_ISNT_PRESENT_ERROR =
+        "El nombre del pais no puede ser nulo";
+    private final String API_CALL_ERROR =
+        "Hubo un error durante la consulta a una api: ";
+
 
     @Value("${infoCountryDomain}")
     private String infoCountryDomain;
@@ -36,12 +51,24 @@ public class ApiCalls {
         log.info("Getting info of: {}", ipAddress);
         return getApiInfo(infoIpDomain, Optional.of(ipAddress), Boolean.FALSE);
     }
+    public String getCountryNameByIpAddress(String ipAddress){
+        return JSONObjectUtils.getValueOfJsonByKey(
+            getInfoIp(ipAddress),
+            JSON_ATTRIBUTE_COUNTRY_NAME);
+    }
+
     public InfoCountryResponse getInfoCountryByName(String countryName) throws Exception {
+        StringUtils.validateStringIsPresent(
+            countryName,
+            COUNTRY_NAME_VALUE_ISNT_PRESENT_ERROR + " getInfoCountryByName method");
+
         log.info("Getting info of: {}", countryName);
         JSONObject json = getApiInfo(infoCountryDomain,Optional.of(countryName), Boolean.TRUE);
         Optional<InfoCountryResponse> optionalResponse =
             InfoCountryResponse.mapFromJsonObject(json);
+
         if(optionalResponse.isEmpty()) throw new Exception("Error during get info country response");
+
         InfoCountryResponse response = optionalResponse.get();
         response.setCountryName(countryName);
         return response;
@@ -53,10 +80,6 @@ public class ApiCalls {
             CurrenciesResponse.mapFromJsonObject(json);
         if(optionalResponse.isEmpty()) throw new Exception("Error during get info of currencies");
         return optionalResponse.get();
-    }
-
-    public Double getActualPriceOfCurrencie(String currencie){
-        return null;
     }
 
     public JSONObject getApiInfo(
@@ -86,6 +109,9 @@ public class ApiCalls {
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();
+            throw new ApiCallException(
+                API_CALL_ERROR + url
+            );
         }
         return json;
     }

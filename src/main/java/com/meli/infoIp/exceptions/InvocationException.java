@@ -9,7 +9,7 @@ public class InvocationException extends ApiException {
         super(HttpStatus.BAD_REQUEST,
                 ErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .title("Reading invocations exception")
+                .title("ServiceInvocation error")
                 .cause(cause)
                 .action(action)
                     .build()

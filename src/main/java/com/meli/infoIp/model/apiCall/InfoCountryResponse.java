@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 @Getter
 @Setter
 @Slf4j
+@Builder
 public class InfoCountryResponse {
 
     private String cioc;

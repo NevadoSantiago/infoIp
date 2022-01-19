@@ -1,7 +1,5 @@
 package com.meli.infoIp.utils;
 
-import org.springframework.beans.factory.annotation.Value;
-
 public class GeoDistanceUtil {
 
     public static double distance(
