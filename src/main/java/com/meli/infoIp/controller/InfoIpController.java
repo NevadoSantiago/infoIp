@@ -1,8 +1,8 @@
 package com.meli.infoIp.controller;
 
+import com.meli.infoIp.cache.IpInformationCache;
 import com.meli.infoIp.model.InfoIpResponse;
 import com.meli.infoIp.services.interfaces.InfoIpInterface;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

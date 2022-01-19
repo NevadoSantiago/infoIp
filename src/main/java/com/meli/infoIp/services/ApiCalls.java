@@ -1,6 +1,6 @@
 package com.meli.infoIp.services;
 
-import com.google.gson.Gson;
+import com.meli.infoIp.cache.IpInformationCache;
 import com.meli.infoIp.exceptions.ApiCallException;
 import com.meli.infoIp.model.apiCall.CurrenciesResponse;
 import com.meli.infoIp.model.apiCall.InfoCountryResponse;
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +29,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ApiCalls {
 
+    @Autowired
+    IpInformationCache cache;
+
+
+
     private final String JSON_ATTRIBUTE_COUNTRY_NAME = "countryName";
 
     public final String COUNTRY_NAME_VALUE_ISNT_PRESENT_ERROR =
         "El nombre del pais no puede ser nulo";
     private final String API_CALL_ERROR =
         "Hubo un error durante la consulta a una api: ";
-
 
     @Value("${infoCountryDomain}")
     private String infoCountryDomain;
@@ -49,7 +55,11 @@ public class ApiCalls {
 
     public JSONObject getInfoIp(String ipAddress){
         log.info("Getting info of: {}", ipAddress);
-        return getApiInfo(infoIpDomain, Optional.of(ipAddress), Boolean.FALSE);
+        return getApiInfo(
+            infoIpDomain,
+            Optional.of(ipAddress),
+            Boolean.FALSE,
+            Boolean.TRUE);
     }
     public String getCountryNameByIpAddress(String ipAddress){
         return JSONObjectUtils.getValueOfJsonByKey(
@@ -63,7 +73,11 @@ public class ApiCalls {
             COUNTRY_NAME_VALUE_ISNT_PRESENT_ERROR + " getInfoCountryByName method");
 
         log.info("Getting info of: {}", countryName);
-        JSONObject json = getApiInfo(infoCountryDomain,Optional.of(countryName), Boolean.TRUE);
+        JSONObject json = getApiInfo(
+            infoCountryDomain,
+            Optional.of(countryName),
+            Boolean.TRUE,
+            Boolean.TRUE);
         Optional<InfoCountryResponse> optionalResponse =
             InfoCountryResponse.mapFromJsonObject(json);
 
@@ -75,7 +89,11 @@ public class ApiCalls {
     }
     public CurrenciesResponse getActualCurrencieInformation() throws Exception {
         log.info("Getting info of actual currencies");
-        JSONObject json = getApiInfo(infoCurrencieDomain,Optional.of(apiKey), Boolean.FALSE);
+        JSONObject json = getApiInfo(
+            infoCurrencieDomain,
+            Optional.of(apiKey),
+            Boolean.FALSE,
+            Boolean.FALSE);
         Optional<CurrenciesResponse> optionalResponse =
             CurrenciesResponse.mapFromJsonObject(json);
         if(optionalResponse.isEmpty()) throw new Exception("Error during get info of currencies");
@@ -85,11 +103,17 @@ public class ApiCalls {
     public JSONObject getApiInfo(
         String url,
         Optional<String> parameter,
-        Boolean isJsonArray) {
-        JSONObject json = null;
+        Boolean isJsonArray,
+        Boolean cacheable) {
+        JSONObject json;
         if (parameter.isPresent()) url = url + parameter.get();
         final String finalUrl = url;
+        if(cacheable){
+            json = cache.get(url);
+            if(json!=null) return json;
+        }
         try {
+            log.info("Consulting.. {} ", url);
             URL urlObject = new URL(finalUrl);
             HttpURLConnection con;
             con = (HttpURLConnection) urlObject.openConnection();
@@ -106,7 +130,7 @@ public class ApiCalls {
                 JSONArray jsonArray = new JSONArray(sb.toString());
                 json = (JSONObject)jsonArray.get(0);
             }else json = new JSONObject(sb.toString());
-
+            if(cacheable) cache.add(url,json);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
             throw new ApiCallException(
@@ -115,4 +139,6 @@ public class ApiCalls {
         }
         return json;
     }
+
+
 }

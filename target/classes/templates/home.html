@@ -2,10 +2,10 @@
 <body>
 <form th:action="@{/api/infoIp}" th:object="${usuario}" method="post">
     <fieldset>
-        <legend>Datos del usuario</legend>
+        <legend>Ingrese la ip que desea consultar</legend>
         <table>
             <tr>
-                <td><label th:text="ip">ip </label></td>
+                <td><label th:style="'font-size:10px'">Ipm ssh</label></td>
                 <td><input type="text" th:name="ipAddress"/></td>
             </tr>
             <tr>
@@ -16,19 +16,21 @@
         </table>
     </fieldset>
 </form>
-<div th:if="${infoIp != null}">
-    <label>Pais</label>
-    <p th:text="${infoIp.countryName}"></p>
-    <label>Codigo ISO</label>
-    <p th:text="${infoIp.isoCode}"></p>
-    <label>Idioma oficial</label>
-    <p th:text="${infoIp.officialLanguage}"></p>
-    <label>Informacion de la moneda</label>
-    <p th:text="${infoIp.coinInfo.coinName}"></p>
-    <p th:text="${infoIp.coinInfo.actualPrice}"></p>
-    <label>Date time</label>
-    <div th:each="dateTime:${infoIp.localDateTimes}">
-        <p th:text="${dateTime.toString()}"></p>
+<div th:style="'background-color: yellow; width:50vw; margin-left:25vw;'" th:if="${infoIp != null}">
+    <div th:style="'background-color: green;'">
+        <label th:style="'font-size:2vw; font-weight:bold;'">Pais</label>
+        <p th:style="'background-color:red'" th:text="${infoIp.countryName}"></p>
+        <label>Codigo ISO</label>
+        <p th:text="${infoIp.isoCode}"></p>
+        <label>Idioma oficial</label>
+        <p th:text="${infoIp.officialLanguage}"></p>
+        <label>Informacion de la moneda</label>
+        <p th:text="${infoIp.coinInfo.coinName}"></p>
+        <p th:text="${infoIp.coinInfo.actualPrice}"></p>
+        <label>Date time</label>
+        <div th:each="dateTime:${infoIp.localDateTimes}">
+            <p th:text="${dateTime.toString()}"></p>
+        </div>
     </div>
 </div>
 </body>

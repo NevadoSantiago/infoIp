@@ -1,12 +1,17 @@
+com\meli\infoIp\exceptions\IllegalArgumentException.class
+com\meli\infoIp\cache\IpInformationCache.class
+com\meli\infoIp\model\apiCall\InfoCountryResponse$InfoCountryResponseBuilder.class
 com\meli\infoIp\InfoIpApplication.class
 com\meli\infoIp\services\InvocationService.class
 com\meli\infoIp\model\InfoIpResponse$InfoIpResponseBuilder.class
 com\meli\infoIp\utils\JSONObjectUtils.class
+com\meli\infoIp\exceptions\ApiCallException.class
 com\meli\infoIp\controller\InvocationsController.class
 com\meli\infoIp\repository\InvocationRepository.class
 com\meli\infoIp\model\CoinInfoResponse$CoinInfoResponseBuilder.class
 com\meli\infoIp\model\ErrorResponse.class
 com\meli\infoIp\services\ApiCalls.class
+com\meli\infoIp\utils\StringUtils.class
 com\meli\infoIp\controller\InfoIpController.class
 com\meli\infoIp\model\apiCall\CurrenciesResponse.class
 com\meli\infoIp\model\CurrenciesResponse.class
