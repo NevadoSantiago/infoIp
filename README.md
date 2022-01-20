@@ -11,7 +11,7 @@
 
  * [Home](http://localhost:8080/home).
  * [Swagger](http://localhost:8080/swagger-ui.html#/)
-   * [Distancia promedio](http://localhost:8080/distanceAverage/)
-   * [Distancia mas lejana](http://localhost:8080/farthest/)
-   * [Distancia mas cercana](http://localhost:8080/nearest/)
+   * [Distancia promedio](http://localhost:8080/api/invocations/distanceAverage/)
+   * [Distancia mas lejana](http://localhost:8080/api/invocations/farthest/)
+   * [Distancia mas cercana](http://localhost:8080/api/invocations/nearest/)
 
