@@ -1,6 +1,5 @@
 package com.meli.infoIp.controller;
 
-import com.meli.infoIp.cache.IpInformationCache;
 import com.meli.infoIp.model.InfoIpResponse;
 import com.meli.infoIp.services.interfaces.InfoIpInterface;
 import org.springframework.beans.factory.annotation.Autowired;

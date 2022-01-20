@@ -1,7 +1,6 @@
 package com.meli.infoIp.services.interfaces;
 
 import com.meli.infoIp.model.InvocationResponse;
-import com.meli.infoIp.model.entity.Invocation;
 
 public interface InvocationInterface {
 

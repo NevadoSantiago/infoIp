@@ -1,12 +1,9 @@
 package com.meli.infoIp.cache;
 
-import com.fasterxml.jackson.databind.util.LRUMap;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,6 @@
 package com.meli.infoIp.services;
 
 import com.meli.infoIp.cache.IpInformationCache;
-//import com.meli.infoIp.client.infoCurrency.InfoCurrencyFeing;
 import com.meli.infoIp.exceptions.ApiCallException;
 import com.meli.infoIp.model.apiCall.CurrenciesResponse;
 import com.meli.infoIp.model.apiCall.InfoCountryResponse;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,9 +30,6 @@ public class ApiCalls {
 
     @Autowired
     IpInformationCache cache;
-
-    /*@Autowired
-    InfoCurrencyFeing infoCurrencyFeing;*/
 
     private final String JSON_ATTRIBUTE_COUNTRY_NAME = "countryName";
 

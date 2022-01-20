@@ -5,16 +5,11 @@ import com.meli.infoIp.model.apiCall.InfoCountryResponse;
 import com.meli.infoIp.utils.DateUtils;
 import com.meli.infoIp.utils.GeoDistanceUtil;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @Setter
