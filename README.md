@@ -9,8 +9,8 @@
 
 ### Funcionamiento:
 
-* [Home](localhost:8080/home).
-* [Swagger](localhost:8080/swagger-ui.html#/)
+[Home](localhost:8080/home).
+[Swagger](localhost:8080/swagger-ui.html#/)
     >[Distancia promedio](localhost:8080/distanceAverage/)
     >[Distancia mas lejana](localhost:8080/farthest/)
     >[Distancia mas cercana](localhost:8080/nearest/)
