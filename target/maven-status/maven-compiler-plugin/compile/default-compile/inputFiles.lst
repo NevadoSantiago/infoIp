@@ -12,6 +12,7 @@ C:\HERE\MELI\src\main\java\com\meli\infoIp\exceptions\IllegalArgumentException.j
 C:\HERE\MELI\src\main\java\com\meli\infoIp\utils\JSONObjectUtils.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\configuration\SwaggerConfig.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\services\InvocationService.java
+C:\HERE\MELI\src\main\java\com\meli\infoIp\controller\rest\InvocationControllerInterface.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\services\ApiCalls.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\model\entity\Invocation.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\model\apiCall\CurrenciesResponse.java

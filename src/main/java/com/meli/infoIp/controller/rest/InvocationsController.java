@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/invocations")
-public class InvocationsController {
+public class InvocationsController implements InvocationControllerInterface{
 
     @Autowired
     InvocationInterface invocationService;

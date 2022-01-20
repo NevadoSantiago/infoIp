@@ -29,6 +29,7 @@ com\meli\infoIp\utils\DateUtils.class
 com\meli\infoIp\exceptions\InvocationException.class
 com\meli\infoIp\exceptions\JsonReadingException.class
 com\meli\infoIp\utils\GeoDistanceUtil.class
+com\meli\infoIp\controller\rest\InvocationControllerInterface.class
 com\meli\infoIp\model\InvocationResponse$InvocationResponseBuilder.class
 com\meli\infoIp\exceptions\ApiException.class
 com\meli\infoIp\services\InfoIpService.class

@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:style="'width:50vw; margin-left = 25vw; background-color=green; align-content=center'">
-    <form th:action="@{/api/infoIp}" th:style="'width:50vw; margin-left = 25vw; background-color=green; align-content=center'" th:object="${usuario}" method="post">
+    <form th:action="@{/home}" th:style="'width:50vw; margin-left = 25vw; background-color=green; align-content=center'" th:object="${usuario}" method="post">
         <input type="text" th:style="'width:50%; margin-left=25%'" th:placeholder="'Ingrese la IP a consultar'"  th:name="ipAddress"/>
         <button type="submit">Consultar</button>
     </form>

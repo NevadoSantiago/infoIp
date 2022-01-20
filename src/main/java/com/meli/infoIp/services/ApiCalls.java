@@ -1,6 +1,7 @@
 package com.meli.infoIp.services;
 
 import com.meli.infoIp.cache.IpInformationCache;
+//import com.meli.infoIp.client.infoCurrency.InfoCurrencyFeing;
 import com.meli.infoIp.exceptions.ApiCallException;
 import com.meli.infoIp.model.apiCall.CurrenciesResponse;
 import com.meli.infoIp.model.apiCall.InfoCountryResponse;
@@ -21,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,7 +34,8 @@ public class ApiCalls {
     @Autowired
     IpInformationCache cache;
 
-
+    /*@Autowired
+    InfoCurrencyFeing infoCurrencyFeing;*/
 
     private final String JSON_ATTRIBUTE_COUNTRY_NAME = "countryName";
 
@@ -87,6 +90,7 @@ public class ApiCalls {
         response.setCountryName(countryName);
         return response;
     }
+
     public CurrenciesResponse getActualCurrencieInformation() throws Exception {
         log.info("Getting info of actual currencies");
         JSONObject json = getApiInfo(
