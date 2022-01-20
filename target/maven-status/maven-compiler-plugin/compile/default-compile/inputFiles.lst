@@ -16,12 +16,12 @@ C:\HERE\MELI\src\main\java\com\meli\infoIp\services\ApiCalls.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\model\entity\Invocation.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\model\apiCall\CurrenciesResponse.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\utils\StringUtils.java
-C:\HERE\MELI\src\main\java\com\meli\infoIp\controller\InvocationsController.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\model\InvocationResponse.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\utils\GeoDistanceUtil.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\repository\InvocationRepository.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\exceptions\ApiCallException.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\model\CoinInfoResponse.java
+C:\HERE\MELI\src\main\java\com\meli\infoIp\controller\rest\InvocationsController.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\cache\IpInformationCache.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\services\InfoIpService.java
 C:\HERE\MELI\src\main\java\com\meli\infoIp\utils\DateUtils.java
